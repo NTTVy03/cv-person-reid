@@ -4,3 +4,4 @@ dataset/market1501/pytorch/
 **.pt
 **.pth
 **.index
+**.zip
