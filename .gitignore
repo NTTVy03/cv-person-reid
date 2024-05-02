@@ -1,0 +1,5 @@
+__pycache__
+.venv
+dataset/market1501/pytorch/
+**.pt
+**.pth
