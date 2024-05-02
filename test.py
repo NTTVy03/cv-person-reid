@@ -1,5 +1,5 @@
-import torch
+import faiss
 
-data = torch.load('output/-1_c1s1_000401_03_0.pt')
+index = faiss.read_index('output.index')
 
-print(data)
+print(index.ntotal)
