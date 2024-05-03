@@ -20,7 +20,7 @@ def model_predict(args):
 
     dataset = ImageFolder(root=args.path, transform=transform)
 
-    batch_size = 32
+    batch_size = 128
     data_loader = DataLoader(dataset=dataset, batch_size=batch_size, shuffle=False)
 
     label_mapping = {idx: cls for cls, idx in data_loader.dataset.class_to_idx.items()}
