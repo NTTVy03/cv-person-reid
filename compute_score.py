@@ -62,8 +62,12 @@ for query_file_name, query_parts in tqdm(query_dict.items()):
         for part in ['whole', 'head', 'upper_body', 'lower_body']:
             if part in query_parts and part in gallery_parts:
                 cos_sim = sim_mats[part][query_parts[part]][gallery_parts[part]]
+                if abs(cos_sim) < 1e-9:
+                    continue
                 count += 1.0
-                sum += 1.0 / max(1e-9, cos_sim)
+                # sum += 1.0 / max(1e-9, cos_sim)
+                sum += 1.0 / cos_sim
+
             harmonic_means[q_idx, g_idx] = count / sum
 
     # qimg = query_dataset['whole'].samples[q_idx][0]
