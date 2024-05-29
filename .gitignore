@@ -1,0 +1,13 @@
+__pycache__
+.venv
+dataset
+logs
+saves
+weights
+runs
+checkpoints
+**.pt
+**.pth
+**.zip
+**.png
+**.npy
