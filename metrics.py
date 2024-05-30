@@ -59,14 +59,16 @@ def mean_avg_prec(y_true, y_scores):
     return np.mean(average_precisions)
 
 
-scores = np.load('saves/scores.npy')
+# scores = np.load('saves/scores.npy')
+scores = np.load('./final.npy')
+
 
 gallery_dataset = ImageFolder('dataset/market1501/bounding_box_test/whole', allow_empty=True)
 query_dataset = ImageFolder('dataset/market1501/query/whole', allow_empty=True)
 
-# for k in [1, 3, 5, 10]:
-#     acc = top_k_acc(scores, query_dataset, gallery_dataset, k)
-#     print(f'Top {k} accuracy: {acc}')
+for k in [1, 3, 5, 10]:
+    acc = top_k_acc(scores, query_dataset, gallery_dataset, k)
+    print(f'Top {k} accuracy: {acc}')
 
 preds = get_class_preds(scores, query_dataset, gallery_dataset)
 
@@ -76,4 +78,4 @@ targets_one_hot[np.arange(len(query_dataset)), targets] = 1
 
 mAP = mean_avg_prec(targets_one_hot, preds)
 
-print(mAP)
+print(f'mAP: {mAP}')

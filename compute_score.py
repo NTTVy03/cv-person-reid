@@ -53,21 +53,22 @@ sim_mats = {
 harmonic_means = np.zeros((len(query_dict), len(gallery_dict)))
 
 N = 0
+part_weights = list(zip(['whole', 'head', 'upper_body', 'lower_body'], [5.0, 1.0, 2.0, 2.0]))
 for query_file_name, query_parts in tqdm(query_dict.items()):
     q_idx = query_parts['whole']
     for gallery_file_name, gallery_parts in gallery_dict.items():
         g_idx = gallery_parts['whole']
         count = 0.0
-        sum = 0.0
-        for part in ['whole', 'head', 'upper_body', 'lower_body']:
+        sum = 1e-9
+        for part, weight in part_weights:
             if part in query_parts and part in gallery_parts:
                 cos_sim = sim_mats[part][query_parts[part]][gallery_parts[part]]
                 if abs(cos_sim) < 1e-9:
                     continue
-                count += 1.0
-                sum += 1.0 / cos_sim
+                count += weight
+                sum += weight / cos_sim
 
-            harmonic_means[q_idx, g_idx] = count / sum
+        harmonic_means[q_idx, g_idx] = count / sum
 
     qimg = query_dataset['whole'].samples[q_idx][0]
 
@@ -93,5 +94,7 @@ for query_file_name, query_parts in tqdm(query_dict.items()):
 
     # Display the plot
     plt.savefig(f'./final/{q_idx}.png')
+
+    plt.close(fig)
 
 np.save('./final.npy', harmonic_means)
