@@ -12,7 +12,7 @@
   - `metrics.py`: Calculate *Rank-k* and *mAP* metrics.
 
 ## Result
-- Market 1501 result: [Google Drive](https://drive.google.com/file/d/1Ft23f27cdU7GWlHO26BtHS9pFpGY-6Z1/view?usp=drive_link) (after extracting, it should be renamed to `saves`)
+- Market 1501 result: [Google Drive](https://drive.google.com/drive/folders/11SBVZWILru7ZARM6-7-yGtgaYS9w7Ete?usp=drive_link) (The `matching-2` is the visualized result on the dataset, for running the script, you only need the `saves`. After extracting, it should be renamed to `saves`)
   - Training logs can be visualized by `tensorboard`
     ```bash
     $ tensorboard --logdir [path_to_log_directory]
