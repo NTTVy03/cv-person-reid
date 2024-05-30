@@ -70,30 +70,31 @@ for query_file_name, query_parts in tqdm(query_dict.items()):
 
             harmonic_means[q_idx, g_idx] = count / sum
 
-    # qimg = query_dataset['whole'].samples[q_idx][0]
+    qimg = query_dataset['whole'].samples[q_idx][0]
 
-    # best_5 = np.argsort(harmonic_means[q_idx])[-5:][::-1]
-    # imgs = [gallery_dataset['whole'].samples[best][0] for best in best_5]
+    best_5 = np.argsort(harmonic_means[q_idx])[-5:][::-1]
+    imgs = [gallery_dataset['whole'].samples[best][0] for best in best_5]
 
-    # to_display = [qimg] + imgs
+    to_display = [qimg] + imgs
 
-    # fig, axes = plt.subplots(1, len(to_display), figsize=(15, 3))
+    fig, axes = plt.subplots(1, len(to_display), figsize=(15, 3))
 
-    # # Plot each image
-    # for i, image_path in enumerate(to_display):
-    #     # Load the image
-    #     image = Image.open(image_path)
+    # Plot each image
+    for i, image_path in enumerate(to_display):
+        # Load the image
+        image = Image.open(image_path)
         
-    #     # Display the image
-    #     axes[i].imshow(image)
-    #     axes[i].set_title(f'Image {i+1}')
-    #     axes[i].axis('off')
+        # Display the image
+        axes[i].imshow(image)
+        axes[i].set_title(os.path.basename(to_display[i]))
+        axes[i].axis('off')
 
-    # # Adjust layout
-    # plt.tight_layout()
+    # Adjust layout
+    plt.tight_layout()
 
-    # # Display the plot
-    # plt.savefig(f'./final/res_{q_idx}.png')
+    # Display the plot
+    plt.savefig(f'./final/{q_idx}.png')
+
 
     # N += 1
     # if N >= 10:
