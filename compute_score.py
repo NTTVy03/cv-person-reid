@@ -65,7 +65,6 @@ for query_file_name, query_parts in tqdm(query_dict.items()):
                 if abs(cos_sim) < 1e-9:
                     continue
                 count += 1.0
-                # sum += 1.0 / max(1e-9, cos_sim)
                 sum += 1.0 / cos_sim
 
             harmonic_means[q_idx, g_idx] = count / sum
@@ -94,10 +93,5 @@ for query_file_name, query_parts in tqdm(query_dict.items()):
 
     # Display the plot
     plt.savefig(f'./final/{q_idx}.png')
-
-
-    # N += 1
-    # if N >= 10:
-    #     break
 
 np.save('./final.npy', harmonic_means)
